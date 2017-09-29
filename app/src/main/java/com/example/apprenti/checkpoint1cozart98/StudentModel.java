@@ -3,8 +3,6 @@ package com.example.apprenti.checkpoint1cozart98;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 /**
  * Created by apprenti on 29/09/17.
  */
@@ -14,18 +12,18 @@ public class StudentModel implements Parcelable {
 
     private String nom;
     private String prenom;
-    private String classe;
+    private String ecole;
     private String langage;
 
     //constructeur à portée public ci-dessous.
 
-    public StudentModel(String toString, String s, String nom, String prenom) {
+    public StudentModel(String nom, String prenom, String ecole,String langage ) {
 
         //intialisation des attributs ci-dessous.
 
         this.nom = nom;
         this.prenom = prenom;
-        this.classe = classe;
+        this.ecole = ecole;
         this.langage = langage;
     }
 
@@ -39,8 +37,8 @@ public class StudentModel implements Parcelable {
         return prenom;
     }
 
-    public String getClasse() {
-        return classe;
+    public String getEcole() {
+        return ecole;
     }
 
     public String getLangage() {
@@ -57,7 +55,7 @@ public class StudentModel implements Parcelable {
 
         dest.writeString(nom);
         dest.writeString(prenom);
-        dest.writeString(classe);
+        dest.writeString(ecole);
         dest.writeString(langage);
 
     }
@@ -79,7 +77,7 @@ public class StudentModel implements Parcelable {
     public StudentModel(Parcel in) {
         this.nom = in.readString();
         this.prenom = in.readString();
-        this.classe = in.readString();
+        this.ecole = in.readString();
         this.langage = in.readString();
 
 

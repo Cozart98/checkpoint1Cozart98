@@ -1,7 +1,6 @@
 package com.example.apprenti.checkpoint1cozart98;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,80 +15,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button bouton = (Button) findViewById(R.id.buttonEnvoyer);
-        final EditText editNom = (EditText) findViewById(R.id.editNom);
-        final EditText editPrenom = (EditText) findViewById(R.id.editPrenom);
-        final EditText editEcole = (EditText) findViewById(R.id.editEcole);
-        final EditText editLangage = (EditText) findViewById(R.id.editLangage);
+        Button send = (Button) findViewById(R.id.buttonEnvoyer);
+        final EditText nom = (EditText) findViewById(R.id.editNom);
+        final EditText prenom = (EditText) findViewById(R.id.editPrenom);
+        final EditText ecole = (EditText) findViewById(R.id.editEcole);
+        final EditText langage = (EditText) findViewById(R.id.editLangage);
 
 
 
-        if(editNom.equals("") || (editPrenom.equals("")) ||
-                editEcole.equals("") || editLangage.equals("")){
-
-            Toast.makeText(getApplicationContext(), getResources().getString
-                    (R.string.toast_champ_vide), Toast.LENGTH_SHORT).show();
-
-        }else{
-
-            editNom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View view, boolean b) {
-                }
-            });
+        final Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (nom.getText().toString().isEmpty() ||
+                    prenom.getText().toString().isEmpty() ||
+                    ecole.getText().toString().isEmpty() ||
+                    langage.getText().toString().isEmpty()){
 
 
+                    Toast.makeText(MainActivity.this, getResources().getString
+                            (R.string.toast_champ_vide), Toast.LENGTH_SHORT).show();
 
-           editPrenom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View view, boolean b) {
+                }else {
 
-
-           editEcole.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                                @Override
-                                public void onFocusChange(View view, boolean b) {
-
-            editLangage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                                        @Override
-                                        public void onFocusChange(View view, boolean b) {
-
-
-            bouton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+                    StudentModel studentModel = new StudentModel(nom.getText().toString(),
+                            prenom.getText().toString(), ecole.getText().toString(),langage.getText().toString());
+                    intent.putExtra("nom", studentModel.getNom());
+                    intent.putExtra("prenom",studentModel.getPrenom() );
+                    intent.putExtra("ecole", studentModel.getEcole());
+                    intent.putExtra("langage", studentModel.getLangage());
                     startActivity(intent);
-
-                    String nom = editNom.getText().toString();
-                    String prenom = editPrenom.getText().toString();
-                    String ecole = editEcole.getText().toString();
-                    String langage = editLangage.getText().toString();
-
-                    intent = new Intent();
-                    intent.putExtra("nom", nom);
-                    intent.putExtra("prenom", prenom);
-                    intent.putExtra("ecole", ecole);
-                    intent.putExtra("langage", langage);
-
-                    StudentModel model = new StudentModel(
-                    editNom.getText().toString(),editPrenom.getText().toString(),
-                            editEcole.getText().toString(),editLangage.getText().toString());
-
-                    intent.putExtra("parcel", (Parcelable) model);
-
-
-
-
-
-
-
                 }
-            });
-        }
-
-
-
-
+            }
+        });
     }
 }
