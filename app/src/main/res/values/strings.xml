@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Checkpoint1Cozart98</string>
+    <string name="edit_nom">Nom</string>
+    <string name="edit_prenom">Prénom</string>
+    <string name="edit_classe">Classe</string>
+    <string name="edit_langage">Langage</string>
+    <string name="bouton_envoyer">Envoyer</string>
+    <string name="toast_champ_vide">Merci de renseigner tous les champs du formulaire.</string>
+</resources>
